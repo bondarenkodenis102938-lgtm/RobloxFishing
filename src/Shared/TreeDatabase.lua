@@ -1,6 +1,6 @@
 -- TreeDatabase
 -- Shared configuration for tree species.
--- This ModuleScript stores data only; tree behavior will live in separate modules.
+-- This ModuleScript stores species data only; behavior lives in separate modules.
 
 local TreeDatabase = {}
 
@@ -10,17 +10,18 @@ TreeDatabase.Species = {
         DisplayName = "Сосна",
         WoodType = "Softwood",
 
-        -- Growth
-        NormalHeight = 10, -- meters
-        GrowthChances = {
-            20, -- 10 -> 11 m
-            15, -- 11 -> 12 m
-            10, -- 12 -> 13 m
-            5,  -- 13 -> 14 m
-            4,  -- 14 -> 15 m
-            3,  -- 15 -> 16 m
-            2,  -- 16 -> 17 m
-            1,  -- 17 -> 18 m
+        -- Growth settings (current proposal; tune after visual testing)
+        TypicalHeight = {
+            Min = 8, -- meters
+            Max = 12, -- meters
+            Center = 10, -- target average
+            RandomSamples = 3, -- averaging samples concentrates results near Center
+        },
+
+        ExceptionalGrowth = {
+            FirstStepChance = 3, -- percent chance to gain the first extra meter
+            ChanceMultiplier = 0.5, -- each following step has half the previous chance
+            HeightStep = 1, -- meters per successful check
         },
 
         -- Wood properties
